@@ -1,5 +1,6 @@
 import 'package:gedka_rs/foundations/color_foundation.dart';
 import 'package:gedka_rs/molecules/input_field.dart';
+import 'package:gedka_rs/molecules/input_field_bottom_sheet.dart';
 import 'package:gedka_rs/molecules/main_button.dart';
 import 'package:flutter/material.dart';
 
@@ -42,30 +43,32 @@ class _SignupScreenState extends State<SignupScreen> {
 
   void _showKartuJaminan(context) {
     List<Map> jaminan = [
-      {'id':0, 'title':'BPJS'},
-      {'id':1, 'title':'Asuransi'},
-      {'id':2, 'title':'Bla bla'},
+      {'id': 0, 'title': 'BPJS'},
+      {'id': 1, 'title': 'Asuransi'},
+      {'id': 2, 'title': 'Bla bla'},
     ];
     showModalBottomSheet<void>(
         context: context,
         builder: (BuildContext context) {
           return Container(
-            padding: EdgeInsets.all(12),
-            child: ListView.separated(
-              itemCount: jaminan.length,
-                itemBuilder: (BuildContext context, int index){
-              return ListTile(
-                title: Text('${jaminan[index]['title']}'),
-                onTap: () {
-                  _kartuJaminanCtrl.text = jaminan[index]['title'];
-                  Navigator.pop(context);
-                  },
-              );
-            }, separatorBuilder: (BuildContext context, int index) {
-                return Divider(color: Colors.grey,);
-            },)
-            );
-
+              padding: EdgeInsets.all(12),
+              child: ListView.separated(
+                itemCount: jaminan.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    title: Text('${jaminan[index]['title']}'),
+                    onTap: () {
+                      _kartuJaminanCtrl.text = jaminan[index]['title'];
+                      Navigator.pop(context);
+                    },
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return Divider(
+                    color: Colors.grey,
+                  );
+                },
+              ));
         });
   }
 
@@ -125,21 +128,30 @@ class _SignupScreenState extends State<SignupScreen> {
                                     errorText: 'harap diisi',
                                     textInputType: TextInputType.none,
                                     type: 'date'),
-                                InkWell(
-                                  onTap:
-                                  () => _showKartuJaminan(context)
-                                  ,
-                                  child: IgnorePointer(
-                                    child: InputField(
-                                      enabled: true,
-                                      controller: _kartuJaminanCtrl,
-                                      label: 'Kartu Jaminan *',
-                                      textInputType: TextInputType.none,
-                                      errorText: 'harap diisi',
-                                      type: 'jaminan',
-                                    ),
-                                  ),
-                                )
+                                // InkWell(
+                                //   onTap:
+                                //   () => _showKartuJaminan(context)
+                                //   ,
+                                //   child: IgnorePointer(
+                                //     child: InputField(
+                                //       enabled: true,
+                                //       controller: _kartuJaminanCtrl,
+                                //       label: 'Kartu Jaminan *',
+                                //       textInputType: TextInputType.none,
+                                //       errorText: 'harap diisi',
+                                //       type: 'jaminan',
+                                //     ),
+                                //   ),
+                                // ),
+                                InputFieldBottomSheet(
+                                  enabled: true,
+                                  controller: _kartuJaminanCtrl,
+                                  label: 'Kartu Jaminan *',
+                                  textInputType: TextInputType.none,
+                                  errorText: 'harap diisi',
+                                  type: 'jaminan',
+                                  function: () => _showKartuJaminan(context),
+                                ),
                               ],
                             ))),
                     Column(
