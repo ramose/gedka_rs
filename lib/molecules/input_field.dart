@@ -7,13 +7,17 @@ class InputField extends StatelessWidget {
   final TextEditingController controller;
   final String label;
   final String errorText;
-  final TextInputType type;
+  final TextInputType textInputType;
+  final String type;
+  final bool enabled;
   const InputField(
       {super.key,
       required this.label,
       required this.errorText,
       required this.controller,
-      required this.type});
+      required this.type,
+      required this.textInputType,
+      required this.enabled});
 
   // final DateTime _selectedDate = DateTime.now();
 
@@ -25,11 +29,8 @@ class InputField extends StatelessWidget {
         lastDate: DateTime.now(),
     );
     if (picked != null) {
-      String _datePicked = '${picked.toLocal()}'.split(' ')[0];
       controller.text = formatDate(picked, [dd, '-', mm, '-', yyyy]);
-      // return '${picked}';
     }
-    // return '';
   }
 
   @override
@@ -39,14 +40,16 @@ class InputField extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         cursorColor: ColorFoundation.activeBgColor,
-        keyboardType: type,
-        onTap: () =>
-            type == TextInputType.none ? onShowDatePicker(context) : {},
+        keyboardType: textInputType,
+        enabled: enabled,
+        onTap:
+            type == 'date' ? () => onShowDatePicker(context) : null,
         decoration: InputDecoration(
           enabledBorder: InputBorderStyle.outlineInputBorder,
           focusedBorder: InputBorderStyle.outlineInputBorder,
           errorBorder: InputBorderStyle.outlineInputBorder,
           focusedErrorBorder: InputBorderStyle.outlineInputBorder,
+          disabledBorder: InputBorderStyle.outlineInputBorder,
           labelText: label,
           labelStyle: const TextStyle(color: ColorFoundation.activeBgColor),
         ),

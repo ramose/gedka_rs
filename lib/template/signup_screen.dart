@@ -18,6 +18,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final _emailCtrl = TextEditingController();
   final _alamatCtrl = TextEditingController();
   final _dobCtrl = TextEditingController();
+  final _kartuJaminanCtrl = TextEditingController();
 
   void onSubmit(key) {
     if (key.currentState!.validate()) {
@@ -37,6 +38,35 @@ class _SignupScreenState extends State<SignupScreen> {
     //     print('--> ada yg salah!');
     //   }
     // }
+  }
+
+  void _showKartuJaminan(context) {
+    List<Map> jaminan = [
+      {'id':0, 'title':'BPJS'},
+      {'id':1, 'title':'Asuransi'},
+      {'id':2, 'title':'Bla bla'},
+    ];
+    showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            padding: EdgeInsets.all(12),
+            child: ListView.separated(
+              itemCount: jaminan.length,
+                itemBuilder: (BuildContext context, int index){
+              return ListTile(
+                title: Text('${jaminan[index]['title']}'),
+                onTap: () {
+                  _kartuJaminanCtrl.text = jaminan[index]['title'];
+                  Navigator.pop(context);
+                  },
+              );
+            }, separatorBuilder: (BuildContext context, int index) {
+                return Divider(color: Colors.grey,);
+            },)
+            );
+
+        });
   }
 
   @override
@@ -60,34 +90,55 @@ class _SignupScreenState extends State<SignupScreen> {
                             child: Column(
                               children: [
                                 InputField(
-                                    controller: _namaCtrl,
-                                    label: 'Nama *',
+                                  enabled: true,
+                                  controller: _namaCtrl,
+                                  label: 'Nama *',
+                                  errorText: 'harap diisi',
+                                  textInputType: TextInputType.text,
+                                  type: '',
+                                ),
+                                InputField(
+                                    enabled: true,
+                                    controller: _phoneCtrl,
+                                    label: 'No. HP *',
                                     errorText: 'harap diisi',
-                                    type: TextInputType.text,
-                                ),
+                                    textInputType: TextInputType.phone,
+                                    type: ''),
                                 InputField(
-                                  controller: _phoneCtrl,
-                                  label: 'No. HP *',
-                                  errorText: 'harap diisi',
-                                  type: TextInputType.phone,
-                                ),
+                                    enabled: true,
+                                    controller: _emailCtrl,
+                                    label: 'Email *',
+                                    errorText: 'harap diisi',
+                                    textInputType: TextInputType.emailAddress,
+                                    type: ''),
                                 InputField(
-                                  controller: _emailCtrl,
-                                  label: 'Email *',
-                                  errorText: 'harap diisi',
-                                  type: TextInputType.emailAddress,
-                                ),
+                                    enabled: true,
+                                    controller: _alamatCtrl,
+                                    label: 'Alamat *',
+                                    errorText: 'harap diisi',
+                                    textInputType: TextInputType.multiline,
+                                    type: ''),
                                 InputField(
-                                  controller: _alamatCtrl,
-                                  label: 'Alamat *',
-                                  errorText: 'harap diisi',
-                                  type: TextInputType.multiline,
-                                ),
-                                InputField(
-                                  controller: _dobCtrl,
-                                  label: 'Tanggal Lahir *',
-                                  errorText: 'harap diisi',
-                                  type: TextInputType.none,
+                                    enabled: true,
+                                    controller: _dobCtrl,
+                                    label: 'Tanggal Lahir *',
+                                    errorText: 'harap diisi',
+                                    textInputType: TextInputType.none,
+                                    type: 'date'),
+                                InkWell(
+                                  onTap:
+                                  () => _showKartuJaminan(context)
+                                  ,
+                                  child: IgnorePointer(
+                                    child: InputField(
+                                      enabled: true,
+                                      controller: _kartuJaminanCtrl,
+                                      label: 'Kartu Jaminan *',
+                                      textInputType: TextInputType.none,
+                                      errorText: 'harap diisi',
+                                      type: 'jaminan',
+                                    ),
+                                  ),
                                 )
                               ],
                             ))),
