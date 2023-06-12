@@ -17,6 +17,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final _phoneCtrl = TextEditingController();
   final _emailCtrl = TextEditingController();
   final _alamatCtrl = TextEditingController();
+  final _dobCtrl = TextEditingController();
 
   void onSubmit(key) {
     if (key.currentState!.validate()) {
@@ -81,6 +82,12 @@ class _SignupScreenState extends State<SignupScreen> {
                                   label: 'Alamat *',
                                   errorText: 'harap diisi',
                                   type: TextInputType.multiline,
+                                ),
+                                InputField(
+                                  controller: _dobCtrl,
+                                  label: 'Tanggal Lahir *',
+                                  errorText: 'harap diisi',
+                                  type: TextInputType.none,
                                 )
                               ],
                             ))),
