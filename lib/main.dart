@@ -1,3 +1,4 @@
+import 'package:gedka_rs/template/HomeScreen.dart';
 import 'package:gedka_rs/template/login_screen.dart';
 import 'package:gedka_rs/template/signup_screen.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +22,8 @@ class MyApp extends StatelessWidget {
   }
 
   final _router = GoRouter(routes: [
-    GoRoute(path: '/', builder:(context, state) => const LoginScreen()),
-    GoRoute(path: '/signup', builder:(context, state) => const SignupScreen())
-  ]);
+    GoRoute(path: '/', builder: (context, state) => const LoginScreen()),
+    GoRoute(path: '/home', builder: (context, state) => const HomeScreen()),
+    GoRoute(path: '/signup', builder: (context, state) => const SignupScreen())
+  ], initialLocation: '/home');
 }
-
