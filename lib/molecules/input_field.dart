@@ -45,6 +45,7 @@ class InputField extends StatelessWidget {
         onTap:
             type == 'date' ? () => onShowDatePicker(context) : null,
         decoration: InputDecoration(
+          contentPadding: EdgeInsets.only(left:10, right:10),
           enabledBorder: InputBorderStyle.outlineInputBorder,
           focusedBorder: InputBorderStyle.outlineInputBorder,
           errorBorder: InputBorderStyle.outlineInputBorder,
@@ -52,6 +53,8 @@ class InputField extends StatelessWidget {
           disabledBorder: InputBorderStyle.outlineInputBorder,
           labelText: label,
           labelStyle: const TextStyle(color: ColorFoundation.activeBgColor),
+          prefixText: type == 'phone' ? '+62' : null,
+          hintText: label
         ),
         validator: (value) {
           if (value == null || value.isEmpty) {
