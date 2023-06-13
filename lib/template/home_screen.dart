@@ -11,7 +11,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<dynamic> _data = [
     {'title':'Data Pasien', 'icon':Icons.verified_user, 'color':Colors.lightBlue, 'path':'/signup'},
-    {'title':'Pendaftaran', 'icon':Icons.app_registration, 'color':Colors.lightGreen, 'path':'/'}
+    {'title':'Pendaftaran', 'icon':Icons.app_registration, 'color':Colors.lightGreen, 'path':'/registration'}
   ];
   @override
   Widget build(BuildContext context) {
@@ -44,6 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                       )),
                 )),
+            Center(
+              child: Text('Mockup 1.0.0'),
+            )
           ],
         ),
       ),

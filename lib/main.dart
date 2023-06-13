@@ -1,5 +1,6 @@
-import 'package:gedka_rs/template/HomeScreen.dart';
+import 'package:gedka_rs/template/home_screen.dart';
 import 'package:gedka_rs/template/login_screen.dart';
+import 'package:gedka_rs/template/reg_screen.dart';
 import 'package:gedka_rs/template/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       routerConfig: _router,
       theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Inter'),
@@ -24,6 +26,7 @@ class MyApp extends StatelessWidget {
   final _router = GoRouter(routes: [
     GoRoute(path: '/', builder: (context, state) => const LoginScreen()),
     GoRoute(path: '/home', builder: (context, state) => const HomeScreen()),
-    GoRoute(path: '/signup', builder: (context, state) => const SignupScreen())
+    GoRoute(path: '/signup', builder: (context, state) => const SignupScreen()),
+    GoRoute(path: '/registration', builder: (context, state) => const RegistrationScreen())
   ], initialLocation: '/home');
 }

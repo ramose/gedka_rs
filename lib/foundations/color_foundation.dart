@@ -15,4 +15,5 @@ class ColorFoundation {
   
   static const Color activeBgColor = AppColor.primary;
   static const Color disabledBgColor = AppColor.lightPrimary;
+
 }

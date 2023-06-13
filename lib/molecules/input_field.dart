@@ -33,6 +33,18 @@ class InputField extends StatelessWidget {
     }
   }
 
+  Future<void> onShowDatePickerForRegistration(context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1930, 1),
+      lastDate: DateTime(DateTime.now().year, DateTime.now().month + 3),
+    );
+    if (picked != null) {
+      controller.text = formatDate(picked, [dd, '-', mm, '-', yyyy]);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,7 +55,14 @@ class InputField extends StatelessWidget {
         keyboardType: textInputType,
         enabled: enabled,
         onTap:
-            type == 'date' ? () => onShowDatePicker(context) : null,
+        () {
+          // type == 'date' ? () => onShowDatePicker(context) : null,
+          switch(type) {
+            case 'date' : onShowDatePicker(context);
+            case 'registration_date' : onShowDatePickerForRegistration(context);
+          }
+        },
+
         decoration: InputDecoration(
           contentPadding: EdgeInsets.only(left:10, right:10),
           enabledBorder: InputBorderStyle.outlineInputBorder,

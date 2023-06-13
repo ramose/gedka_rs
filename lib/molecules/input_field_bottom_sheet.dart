@@ -46,6 +46,7 @@ class InputFieldBottomSheet extends StatelessWidget {
         enabled: enabled,
         onTap: function,
         decoration: InputDecoration(
+          contentPadding: EdgeInsets.only(left:10, right:10),
           enabledBorder: InputBorderStyle.outlineInputBorder,
           focusedBorder: InputBorderStyle.outlineInputBorder,
           errorBorder: InputBorderStyle.outlineInputBorder,
